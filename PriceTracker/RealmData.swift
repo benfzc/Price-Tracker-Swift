@@ -76,10 +76,10 @@ class RealmPrice {
             commodity.prices.append(price)
             commodity.barcode = barcode
             if let name = name {
-                commodity.name = "\(name)"
+                commodity.name = name
             }
             if let imageName = imageName {
-                commodity.imageName = "\(imageName)"
+                commodity.imageName = imageName
             }
             
             try realm.write {
@@ -96,11 +96,13 @@ class RealmPrice {
             realm.delete(commodity.prices[index])
         }
         
+        /* do this in uppler layer
         if commodity.prices.count == 0 {
             try realm.write {
                 realm.delete(commodity)
             }
         }
+        */
     }
     
     static func deleteCommodity(barcode: String) throws {

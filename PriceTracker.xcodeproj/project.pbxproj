@@ -15,6 +15,7 @@
 		B53B4E9C20EB07B100CCC853 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B4E9B20EB07B100CCC853 /* DetailViewController.swift */; };
 		B53B4E9E20EB385A00CCC853 /* DetailPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B4E9D20EB385A00CCC853 /* DetailPriceTableViewCell.swift */; };
 		B53B4EA020EB4A0F00CCC853 /* CommodityListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B4E9F20EB4A0F00CCC853 /* CommodityListTableViewCell.swift */; };
+		B58CD2BE20ECAE7900BB6B64 /* JpegWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58CD2BD20ECAE7900BB6B64 /* JpegWrapper.swift */; };
 		B5ADD78920E715BA000F986E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD78820E715BA000F986E /* AppDelegate.swift */; };
 		B5ADD78B20E715BA000F986E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD78A20E715BA000F986E /* ViewController.swift */; };
 		B5ADD78E20E715BA000F986E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5ADD78C20E715BA000F986E /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		B53B4E9B20EB07B100CCC853 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B53B4E9D20EB385A00CCC853 /* DetailPriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPriceTableViewCell.swift; sourceTree = "<group>"; };
 		B53B4E9F20EB4A0F00CCC853 /* CommodityListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommodityListTableViewCell.swift; sourceTree = "<group>"; };
+		B58CD2BD20ECAE7900BB6B64 /* JpegWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JpegWrapper.swift; sourceTree = "<group>"; };
 		B5ADD78520E715B9000F986E /* PriceTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5ADD78820E715BA000F986E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5ADD78A20E715BA000F986E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				B5ADD78A20E715BA000F986E /* ViewController.swift */,
 				B53B4E9920EA630800CCC853 /* HistoryViewController.swift */,
 				B53B4E9720EA296400CCC853 /* CommodityAddViewController.swift */,
+				B58CD2BD20ECAE7900BB6B64 /* JpegWrapper.swift */,
 				B5088E9920EBD98500BE5018 /* AlertWrapper.swift */,
 				B53B4E9520EA230600CCC853 /* RealmData.swift */,
 				B5ADD78C20E715BA000F986E /* Main.storyboard */,
@@ -234,6 +237,7 @@
 				B53B4E9A20EA630800CCC853 /* HistoryViewController.swift in Sources */,
 				B53B4EA020EB4A0F00CCC853 /* CommodityListTableViewCell.swift in Sources */,
 				B5ADD78920E715BA000F986E /* AppDelegate.swift in Sources */,
+				B58CD2BE20ECAE7900BB6B64 /* JpegWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

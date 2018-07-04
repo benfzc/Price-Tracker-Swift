@@ -18,7 +18,7 @@ class AlertWrapper {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
             alertViewController.dismiss(animated: true, completion: nil)
 
-            completion!()
+            completion?()
         })
         /* add button to window */
         alertViewController.addAction(okAction)

@@ -22,6 +22,11 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        // add white color board to image view
+        commodityImageView.layer.borderWidth = 8
+        commodityImageView.layer.cornerRadius = 10
+        commodityImageView.layer.borderColor = UIColor.white.cgColor
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +71,9 @@ class HistoryViewController: UIViewController {
             }
             
             // FIXME: show image
+            if commodity.imageName != "" {
+                commodityImageView.image = JpegWrapper.loadJpegFromDocumentDirectory(filename: commodity.imageName)
+            }
             
             highestPriceLabel.text = String(format: "%2.2f", RealmPrice.getMaxPrice(commodity: commodity))
             lowestPriceLabel.text = String(format: "%2.2f", RealmPrice.getMinPrice(commodity: commodity))

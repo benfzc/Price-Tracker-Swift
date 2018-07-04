@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     var barcode = ""
-    
+
     @IBOutlet weak var priceTableView: UITableView!
     @IBOutlet weak var barcodeLabel: UILabel!
     override func viewDidLoad() {
@@ -26,14 +26,13 @@ class DetailViewController: UIViewController {
             }
         }
     }
-
 }
 
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return RealmPrice.getPriceRecordCount(barcode: barcode)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "priceTableViewCell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "priceTableViewCell", for: indexPath) as! DetailPriceTableViewCell
@@ -46,21 +45,32 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             do {
                 try RealmPrice.deletePrice(barcode: barcode, index: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic) // only delete UI item
+                tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             catch {
                 AlertWrapper.showMessage(viewController: self, title: "Error Deleting Price", message: "")
                 return
             }
-            if RealmPrice.getCommodity(barcode: barcode) == nil {
-                navigationController?.popToRootViewController(animated: true)
+
+            // if all price data are deleted, delete this commodity too
+            if let commodity = RealmPrice.getCommodity(barcode: barcode) {
+                if commodity.prices.count == 0 {
+                    JpegWrapper.removeImageFileInDocumentDirectory(filename: commodity.imageName)
+                    do {
+                        try RealmPrice.deleteCommodity(barcode: barcode)
+                    }
+                    catch {
+                        print("delete Commodity with barcode \(barcode) failed\n")
+                        return
+                    }
+                    navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
     }
-    
 }

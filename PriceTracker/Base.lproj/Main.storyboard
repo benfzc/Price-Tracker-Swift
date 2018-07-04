@@ -128,6 +128,7 @@
                     <navigationItem key="navigationItem" title="Price Tracker" id="bog-F4-bbG"/>
                     <connections>
                         <outlet property="commoditiesTableView" destination="w9s-Gl-HXg" id="Cma-tu-bAm"/>
+                        <outlet property="keywordTextField" destination="ooQ-04-PC3" id="gHS-xB-IJQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

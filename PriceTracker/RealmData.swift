@@ -123,6 +123,10 @@ class RealmPrice {
         return realm.objects(Commodity.self)
     }
 
+    static func getCommodities(keyword: String) -> Results<Commodity> {
+        return realm.objects(Commodity.self).filter("name CONTAINS '\(keyword)'")
+    }
+
     static func getCommodity(barcode: String) -> Commodity? {
         return realm.objects(Commodity.self).filter("barcode = %@", barcode).first
     }

@@ -11,8 +11,11 @@ import BarcodeScanner
 
 class ViewController: UIViewController {
     var barcode = ""
+    var commodities = RealmPrice.getCommodities()
+
     @IBOutlet weak var commoditiesTableView: UITableView!
-    
+    @IBOutlet weak var keywordTextField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,18 +23,47 @@ class ViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        commoditiesTableView.reloadData()
+        reloadTableView()
+
+        // watch user input to update tableview in real time
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(textDidChange),
+                                               name: NSNotification.Name.UITextFieldTextDidChange,
+                                               object: nil)
+
     }
-    
+
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+    }
+
+
+
     @IBAction func scanButtonTapped(_ sender: Any) {
         launchBarcodeScanner()
     }
+
 
     // hide keyboard when touching background
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 
+
+    func reloadTableView() {
+        if let keyword = keywordTextField.text, keyword.count > 0 {
+            commodities = RealmPrice.getCommodities(keyword: keyword)
+        }
+        else {
+            commodities = RealmPrice.getCommodities()
+        }
+        commoditiesTableView.reloadData()
+    }
+}
+
+
+// MARK:- create next page
+extension ViewController {
     func showCommodityAddViewController(barcode: String){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let nextViewController = storyboard.instantiateViewController(withIdentifier: "CommodityAddViewController") as? CommodityAddViewController else {
@@ -63,11 +95,11 @@ class ViewController: UIViewController {
 // MARK:- UITableView Data Source
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return RealmPrice.getCommodities().count
+        return commodities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let commodity = RealmPrice.getCommodities()[indexPath.row]
+        let commodity = commodities[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "commodityCell", for: indexPath) as! CommodityListTableViewCell
         if commodity.name.count > 0 {
             cell.nameLabel.text = commodity.name
@@ -80,7 +112,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showHistoryViewController(barcode: RealmPrice.getCommodities()[indexPath.row].barcode)
+        showHistoryViewController(barcode: commodities[indexPath.row].barcode)
     }
     
 }
@@ -129,9 +161,14 @@ extension ViewController: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegat
 }
 
 
+// MARK:- TextField Delegate
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+
+    @objc private func textDidChange() {
+        reloadTableView()
     }
 }

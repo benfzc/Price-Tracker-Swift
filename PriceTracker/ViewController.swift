@@ -127,3 +127,11 @@ extension ViewController: BarcodeScannerCodeDelegate, BarcodeScannerErrorDelegat
         controller.dismiss(animated: true, completion: nil)
     }
 }
+
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}

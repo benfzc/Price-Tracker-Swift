@@ -98,3 +98,10 @@ extension CommodityAddViewController: UIImagePickerControllerDelegate, UINavigat
         dismiss(animated:true, completion: nil)
     }
 }
+
+extension CommodityAddViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
